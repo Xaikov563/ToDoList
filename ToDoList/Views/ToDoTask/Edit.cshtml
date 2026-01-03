@@ -1,0 +1,21 @@
+﻿@model ToDoList.Models.ToDoTask;
+
+@{
+	ViewData["Title"] = "Task Details";
+}
+
+<h2>Edit Task</h2>
+<a class="btn btn-primary" asp-action="Details" asp-controller="ToDoTask" asp-route-id="@Model.Id">← Back to Details</a>
+
+<form asp-action="EditFunction" method="post" class="p-3">
+	<input type="hidden" asp-for="Id" />
+	<div>
+		<label asp-for="Title" class="form-label">Title</label>
+		<input asp-for="Title" class="form-control" />
+
+		<label asp-for="Description" class="form-label">Description</label>
+		<textarea asp-for="Description" class="form-control"></textarea>
+	
+		<button type="submit" class="btn btn-primary mt-2 p-2">Save Changes</button>
+	</div>
+</form>

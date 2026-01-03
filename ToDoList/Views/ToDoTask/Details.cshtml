@@ -1,0 +1,18 @@
+﻿@model ToDoList.Models.ToDoTask;
+
+@{
+    ViewData["Title"] = "Task Details";
+}
+
+<form method="post" asp-action="DeleteFunction">
+    <a class="btn btn-primary" asp-action="Index"><- Back to List</a>
+
+    <a class="btn btn-primary" asp-action="Edit" asp-controller="ToDoTask" asp-route-id="@Model.Id">Edit</a>
+
+    <button class="btn btn-success" asp-action="TaskComplete" asp-controller="ToDoTask" asp-route-id="@Model.Id">Task Done</button>
+</form>
+<div class="container p-4">
+<h2>@Model.Title</h2>
+<p>Created at @Model.Date</p>
+<p>@Model.Description</p>
+</div>

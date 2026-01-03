@@ -1,0 +1,85 @@
+﻿@model IEnumerable<ToDoList.Models.ToDoTask>
+
+<h2>To Do List</h2>
+
+<a asp-controller="ToDoTask" asp-action="CreatePage" class="btn btn-primary">Add Task</a>
+
+<div class="container border m-3">
+
+    <h2>Tasks to do</h2>
+
+
+    <div class="container m-5 ">
+
+        @if (Model.Any(item => item.is_Completed == false))
+        {
+
+            @foreach (var item in Model.Where(item => item.is_Completed == false))
+            {
+
+
+
+
+                <div class="card d-inline-flex" style="width: 18rem;">
+                    <div class="card-body">
+                        <form method="post" asp-action="DeleteFunction">
+                            <h5 class="card-title">@item.Title</h5>
+                            <p class="card-text">@item.Date.ToString("yyyy-MM-dd")</p>
+                            <a class="btn btn-primary" asp-action="Details" asp-controller="ToDoTask" asp-route-id="@item.Id">Details</a>                
+                            <button class="btn btn-danger" asp-action="DeleteFunction" asp-controller="ToDoTask" asp-route-id="@item.Id">Delete</button>
+                            <button class="btn btn-success" asp-action="TaskComplete" asp-controller="ToDoTask" asp-route-id="@item.Id">Task Done</button>
+
+                        </form>
+
+                        <span class="badge bg-warning text-dark">Task Not Completed</span>
+
+
+                    </div>
+
+                </div>
+
+            }
+
+        } else
+        {
+            <h2>You have no Tasks Yet.</h2>
+        }
+
+    </div>
+
+</div>
+
+<div class="container border m-3">
+
+    <h2>Completed Tasks</h2>
+
+    <div class="container m-5 name=" completedtasks"">
+
+        @if (Model.Any(item => item.is_Completed == true))
+        {
+
+            @foreach (var item in Model.Where(item => item.is_Completed == true)){
+
+                    <div class="card d-inline-flex" style="width: 18rem;">
+                        <div class="card-body">
+                        
+                            <form method="post" asp-action="DeleteFunction">
+                                <h5 class="card-title">@item.Title</h5>
+                                <p class="card-text">@item.Date.ToString("yyyy-MM-dd")</p>
+                                <a class="btn btn-primary" asp-action="Details" asp-controller="ToDoTask" asp-route-id="@item.Id">Details</a>
+                                <button class="btn btn-danger" asp-action="DeleteFunction" asp-controller="ToDoTask" asp-route-id="@item.Id">Delete</button>
+
+                            </form>
+
+                        <span class="badge bg-success">Task Completed</span>
+
+                        </div>
+                    </div>
+            }
+
+        }else
+        {
+            <h2>You have no Completed Tasks Yet.</h2>
+        }
+</div>
+</div>
